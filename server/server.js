@@ -16,6 +16,16 @@ var io = socketIO(server);
 io.on('connection',(socket)=>{
     console.log("new connection");
 
+    socket.emit('newMessage',{
+        from: "ed@example.com",
+        text: "Hey, what's goin on",
+        createdAt: 1234
+    });
+
+    socket.on('createMessage', (email) => {
+        console.log('Got Message:',email);
+    });
+
     socket.on('disconnect',() => {
         console.log('disconnected from client');
     });
